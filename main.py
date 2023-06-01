@@ -20,7 +20,7 @@ def read_button_state():
         return file.read() == "True"
     
 def write_button_state():
-    with open(filepath, "w") as file:
+    with open(file_path, "w") as file:
       file.write("This won't work, I know")
      
 repository_owner = "awilwayco"
