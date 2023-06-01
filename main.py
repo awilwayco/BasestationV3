@@ -36,7 +36,7 @@ st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 st.markdown("<h1 style='text-align: center; color: white;'>SWAMP Blimps</h1>", unsafe_allow_html=True)
 
 file_path = "database.txt"
-repository_url = "https://github.com/your-username/your-repo.git"
+repository_url = "https://github.com/awilwayco/BasestationV3.git"
 branch_name = "main"
 
 @st.cache(allow_output_mutation=True)
