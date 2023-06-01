@@ -4,6 +4,8 @@ import os
 cmd = 'pip install GitPython'
 os.system(cmd)
 
+import git
+
 # Hide Streamlit Style
 hide_streamlit_style = """
                         <style>
