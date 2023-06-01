@@ -1,21 +1,12 @@
 import streamlit as st
-import requests
+from github import Github
 
 def write_to_github(file_path, repository_owner, repository_name, branch_name, content, access_token):
-    url = f"https://api.github.com/{repository_owner}/{repository_name}/contents/{file_path}"
-    headers = {"Authorization": f"Bearer {access_token}"}
-
-    data = {
-        "message": "Updated file",
-        "content": content,
-        "branch": branch_name
-    }
-
-    response = requests.put(url, headers=headers, json=data)
-    if response.status_code == 200:
-        st.success("File updated successfully")
-    else:
-        st.error(f"Error updating file: {response.text}")
+    g = Github(access_token)
+    repo = g.get_repo(f"{repository_owner}/{repository_name}")
+    file = repo.get_contents(file_path, ref=branch_name)
+    repo.update_file(file.path, "Updated file", content, file.sha, branch=branch_name)
+    st.success("File updated successfully")
 
 # Hide Streamlit Style
 hide_streamlit_style = """
