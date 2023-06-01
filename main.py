@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 import streamlit as st
 import os
-from github import Github
 
 cmd = 'pip install PyGithub'
 os.system(cmd)
+
+from github import Github
 
 # Hide Streamlit Style
 hide_streamlit_style = """
