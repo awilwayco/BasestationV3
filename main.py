@@ -1,9 +1,6 @@
 import streamlit as st
 
-st.markdown("<h1 style='text-align: center; color: red;'>Some title</h1>", unsafe_allow_html=True)
-
-st.title("SWAMP Blimps")
-
+# Hide Streamlit Style
 hide_streamlit_style = """
                         <style>
                         #MainMenu {visibility: hidden;}
@@ -11,3 +8,6 @@ hide_streamlit_style = """
                         </style>
                         """
 st.markdown(hide_streamlit_style, unsafe_allow_html=True) 
+
+# Title
+st.markdown("<h1 style='text-align: center; color: white;'>SWAMP Blimps</h1>", unsafe_allow_html=True)
