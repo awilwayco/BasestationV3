@@ -2,7 +2,7 @@
 import streamlit as st
 import os
 
-cmd = 'pip install PyGithub'
+#cmd = 'pip install PyGithub'
 os.system(cmd)
 
 # Hide Streamlit Style
