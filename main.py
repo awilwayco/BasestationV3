@@ -5,8 +5,6 @@ import os
 cmd = 'pip install PyGithub'
 os.system(cmd)
 
-from github import Github
-
 # Hide Streamlit Style
 hide_streamlit_style = """
                         <style>
