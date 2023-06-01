@@ -1,18 +1,4 @@
 import streamlit as st
-import sys
-
-# Add the path to the pygithub package
-sys.path.append('/home/appuser/venv/lib/python3.9/site-packages')
-from github import Github
-
-access_token = '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'
-g = Github(access_token)
-
-def write_to_github(file_path, repository_name, branch_name, content):
-    repo = g.get_user().get_repo(repository_name)
-    branch = repo.get_branch(branch_name)
-    file = repo.get_contents(file_path, ref=branch.name)
-    repo.update_file(file.path, "Commit message", content, file.sha, branch=branch.name)
 
 # Hide Streamlit Style
 hide_streamlit_style = """
@@ -31,12 +17,10 @@ def read_button_state():
     with open("database.txt", "r") as file:
         return file.read() == "True"
 
-file_path = 'database.txt'
-repository_name = 'BasestationV3'
-branch_name = 'main'  # or the name of the branch where the file is located
-content = str(button_state)
-
-write_to_github(file_path, repository_name, branch_name, content)
+@st.cache(allow_output_mutation=True)
+def write_button_state(button_state):
+    with open("button_state.txt", "w") as file:
+        file.write(str(button_state))
 
 button_state = read_button_state()
 
