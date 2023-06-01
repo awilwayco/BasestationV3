@@ -21,7 +21,9 @@ session_state = get_session_state()
 if st.button("True/False Button"):
     session_state.button_state = not session_state.button_state
 
-if session_state.button_state:
+button_state = session_state.button_state
+
+if button_state:
     st.write("Button is True")
 else:
     st.write("Button is False")
