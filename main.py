@@ -1,4 +1,8 @@
 import streamlit as st
+import sys
+
+# Add the path to the pygithub package
+sys.path.append('/home/appuser/venv/lib/python3.9/site-packages')
 from github import Github
 
 access_token = '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'
