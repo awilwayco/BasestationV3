@@ -1,7 +1,7 @@
 import streamlit as st
 from github import Github
 
-access_token = 'YOUR_PERSONAL_ACCESS_TOKEN'
+access_token = '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'
 g = Github(access_token)
 
 def write_to_github(file_path, repository_name, branch_name, content):
