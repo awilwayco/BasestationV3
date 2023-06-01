@@ -8,13 +8,13 @@ os.system(cmd)
 
 def write_to_github(file_path, repository_url, branch_name, content):
     # Clone the repository
-    repo = Repo.clone_from(repository_url, "temp_folder")
+    repo = Repo.clone_from(repository_url)
     
     # Checkout the branch
     repo.git.checkout(branch_name)
     
     # Modify the file content
-    file_path_in_repo = f"temp_folder/{file_path}"
+    file_path_in_repo = f"{file_path}"
     with open(file_path_in_repo, "w") as file:
         file.write(content)
     
