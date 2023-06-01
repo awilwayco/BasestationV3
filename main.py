@@ -34,12 +34,12 @@ def read_button_state():
     with open("database.txt", "r") as file:
         return file.read() == "True"
       
-file_path = st.text_input("database.txt")
-repository_owner = st.text_input("awilwayco")
-repository_name = st.text_input("BasestationV3")
-branch_name = st.text_input("main")
-content = st.text_area(str(button_state))
-access_token = st.text_input("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")
+file_path = "database.txt"
+repository_owner = "awilwayco"
+repository_name = "BasestationV3"
+branch_name = "main"
+content = str(button_state)
+access_token = "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"
 
 button_state = read_button_state()
 
