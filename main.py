@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 import streamlit as st
-from github import Github
 import os
+from github import Github
 
 cmd = 'pip install PyGithub'
 os.system(cmd)
