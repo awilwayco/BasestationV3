@@ -1,26 +1,10 @@
 #!/usr/bin/env python3
 import streamlit as st
+from github import Github
 import os
-from git import Repo
 
-cmd = 'pip install GitPython'
+cmd = 'pip install PyGithub'
 os.system(cmd)
-
-def write_to_github(file_path, repository_url, branch_name, content):
-    # Clone the repository
-    repo = Repo.clone_from(repository_url, ".")
-
-    # Checkout the branch
-    repo.git.checkout(branch_name)
-
-    # Modify the file content
-    with open(file_path, "w") as file:
-        file.write(content)
-
-    # Commit and push the changes
-    repo.git.add(file_path)
-    repo.index.commit("Updated file")
-    repo.git.push("origin", branch_name)
 
 # Hide Streamlit Style
 hide_streamlit_style = """
@@ -53,7 +37,6 @@ button_state = read_button_state()
 if st.button("True/False Button", key="button"):
     button_state = not button_state
     content = str(button_state)
-    write_to_github(file_path, repository_url, branch_name, content)
     #write_to_github(file_path, repository_owner, repository_name, branch_name, content, access_token)
 
 if button_state:
