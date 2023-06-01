@@ -1,4 +1,14 @@
 import streamlit as st
+from github import Github
+
+access_token = 'YOUR_PERSONAL_ACCESS_TOKEN'
+g = Github(access_token)
+
+def write_to_github(file_path, repository_name, branch_name, content):
+    repo = g.get_user().get_repo(repository_name)
+    branch = repo.get_branch(branch_name)
+    file = repo.get_contents(file_path, ref=branch.name)
+    repo.update_file(file.path, "Commit message", content, file.sha, branch=branch.name)
 
 # Hide Streamlit Style
 hide_streamlit_style = """
@@ -17,10 +27,12 @@ def read_button_state():
     with open("database.txt", "r") as file:
         return file.read() == "True"
 
-@st.cache(allow_output_mutation=True)
-def write_button_state(button_state):
-    with open("database.txt", "w") as file:
-        file.write(str(button_state))
+file_path = 'database.txt'
+repository_name = 'BasestationV3'
+branch_name = 'main'  # or the name of the branch where the file is located
+content = str(button_state)
+
+write_to_github(file_path, repository_name, branch_name, content)
 
 button_state = read_button_state()
 
