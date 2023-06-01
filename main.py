@@ -38,13 +38,13 @@ file_path = "database.txt"
 repository_owner = "awilwayco"
 repository_name = "BasestationV3"
 branch_name = "main"
-content = str(button_state)
 access_token = "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"
 
 button_state = read_button_state()
 
 if st.button("True/False Button", key="button"):
     button_state = not button_state
+    content = str(button_state)
     write_to_github(file_path, repository_owner, repository_name, branch_name, content, access_token)
 
 if button_state:
