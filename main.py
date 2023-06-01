@@ -2,7 +2,7 @@ import streamlit as st
 import requests
 
 def write_to_github(file_path, repository_owner, repository_name, branch_name, content, access_token):
-    url = f"https://api.github.com/repos/{repository_owner}/{repository_name}/contents/{file_path}"
+    url = f"https://api.github.com/{repository_owner}/{repository_name}/contents/{file_path}"
     headers = {"Authorization": f"Bearer {access_token}"}
 
     data = {
