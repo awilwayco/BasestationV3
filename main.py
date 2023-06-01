@@ -1,8 +1,8 @@
 import streamlit as st
-import subprocess
+import os
 
-subprocess.run(["pip install GitPython"])  
-
+cmd = 'pip install GitPython'
+os.system(cmd)
 
 # Hide Streamlit Style
 hide_streamlit_style = """
