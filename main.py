@@ -1,44 +1,52 @@
 #!/usr/bin/env python3
+"""
+pip3 install pySerial
+pip3 install easygui
+sudo apt-get install python3-tk (to install tkinter, needed for easygui)
+"""
+# * Note - To-Do *
+# To Fix Nodes not getting destroyed correctly, we need to add argparse to get Ctrl+C and then destroy all nodes
+# Python Packages
+from threading import Thread
+import time
+import subprocess
+# ROS2 Packages
+import rclpy
+from rclpy.node import Node
+from std_msgs.msg import Bool
+# Streamlit Package
 import streamlit as st
-import os
-
-#cmd = 'pip install PyGithub'
-#os.system(cmd)
-
-# Hide Streamlit Style
-hide_streamlit_style = """
-                        <style>
-                        #MainMenu {visibility: hidden;}
-                        footer {visibility: hidden;}
-                        </style>
-                        """
-st.markdown(hide_streamlit_style, unsafe_allow_html=True) 
-
-# Title
-st.markdown("<h1 style='text-align: center; color: white;'>SWAMP Blimps</h1>", unsafe_allow_html=True)
-
-file_path = "database.txt"
-repository_url = "https://github.com/awilwayco/BasestationV3.git"
-branch_name = "main"
-
-@st.cache(allow_output_mutation=True)
-def read_button_state():
-    with open(file_path, "r") as file:
-        return file.read() == "True"
-     
-repository_owner = "awilwayco"
-repository_name = "BasestationV3"
-branch_name = "main"
-access_token = "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"
-
-button_state = read_button_state()
-
-if st.button("True/False Button", key="button"):
-    button_state = not button_state
-    content = str(button_state)
-    #write_to_github(file_path, repository_owner, repository_name, branch_name, content, access_token)
-
-if button_state:
-    st.write("Button is True")
-else:
-    st.write("Button is False")
+# from BlimpHandler import BlimpHandler
+class Listener(Node):
+    def __init__(self):
+        super().__init__('Listener')
+        self.subscription = self.create_subscription(
+            Bool,
+            '/Blimp1/auto',
+            self.listener_callback,
+            10)
+        self.subscription  # prevent unused variable warning
+    def listener_callback(self, msg):
+        self.get_logger().info('I heard: "%s"' % msg.data)
+        data_placeholder.write("Auto: {}".format(msg.data))
+@st.cache_resource
+def initROS():
+    # To-DO
+    # Everytime you reload the page, you create a new node, so we need to make sure we only have one node
+    rclpy.init()
+def main():
+    initROS()
+    global data_placeholder
+    # Start the Streamlit application
+    st.title("Basestation")
+    data_placeholder = st.empty()
+    minimal_subscriber = Listener()
+    rclpy.spin(minimal_subscriber)
+    # Clean up and shutdown ROS2
+    # To-Do *
+    # To Fix Nodes not getting destroyed correctly, we need to add argparse to get Ctrl+C and then destroy all nodes
+    minimal_subscriber.destroy_node()
+    rclpy.shutdown()
+if __name__ == '__main__':
+    main()
+  
